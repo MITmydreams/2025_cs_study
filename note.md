@@ -1087,6 +1087,7 @@ IN操作不能针对集合包含集合的操作。
     Select * From Student
     Where sno IN (‘s001’,’s003’,’s006’,’s008’)
 
+`*` 表示所有列。
 **IS [NOT] NULL**：查询缺少年龄数据的学生
 
     Select * From Student Where age IS NULL
@@ -1111,10 +1112,10 @@ _：单个字符
 查询学生的姓名:
 
 - `Select Distinct sname From Student`
-- Distinct只对记录有效，不针对某个特定列
+- Distinct**只对记录有效**，不针对某个特定列
   - `Select Distinct sname, age From Student`
 
-排序查询结果:
+###### 3.排序查询结果
 
 <!-- markdownlint-disable MD033 -->
 
@@ -1127,7 +1128,7 @@ _：单个字符
    Order By age ASC, sname DESC`
   - ASC表示升序，DESC表示降序
 
-###### 使用聚集函数
+###### 4.使用聚集函数
 
 > Count(列名)：对一列中的值计数
 > Count(*)：计算记录个数
@@ -1244,18 +1245,20 @@ _：单个字符
 
   - 相关子查询不可单独执行，依赖于外层查询
 - EXISTS（子查询）：当子查询返回结果非空时为真，否则为假
-- 执行分析：对于student的每一行，根据该行的sno去sc中查找有无匹配记录
-
-> exists 通常用于嵌套查询中
+- **执行分析：对于student的每一行，根据该行的sno去sc中查找有无匹配记录**
+  > exists 通常用于嵌套查询中
 
 - 查询选修了全部课程的学号和姓名
 
+        1
         Select sno, sname
         From student
         Where NOT EXISTS
         (Select * From course Where NOT EXISTS
         (Select * From SC Where
         sno = student.sno and cno=course.cno))
+
+        2
         Select sno, sname
         From student
         Where NOT EXISTS
@@ -1284,40 +1287,47 @@ _：单个字符
 
 #### 查询结果的连接
 
- Union和Union All
- Minus
- Intersects
+- Union和Union All
+- Minus
+- Intersects
 
 （1）Union和Union All
- 查询课程平均成绩在90分以上或者年龄小于20的学生学号
-(Select sno From student where age<20)
-UNION
-(Select sno
- From (Select sno, AVG(score)
- From SC
- group by sno
- having avg(score)>90) SC2
-)
- UNION操作自动去除重复记录 ——Set Union
- Union All操作不去除重复记录 ——Bag Union
+
+- 查询课程平均成绩在90分以上或者年龄小于20的学生学号
+
+        (Select sno From student where age<20)
+        UNION
+        (Select sno
+            From (Select sno, AVG(score)
+                From SC
+                group by sno
+                having avg(score)>90) SC2
+        )
+
+- UNION操作自动去除重复记录 ——Set Union
+- Union All操作不去除重复记录 ——Bag Union
 
 （2）Minus操作：差
- 查询未选修课程的学生学号
-(Select sno From Student)
-Minus
-(Select distinct sno From SC)
 
-(3)Intersect操作
- 返回两个查询结果的交集
- 查询课程平均成绩在90分以上并且年龄小于20的学生学号
-(Select sno From student where age<20)
-Intersect
-(Select sno
- From (Select sno, AVG(score)
- From SC
- group by sno
- having avg(score)>90) SC2
-)
+- 查询未选修课程的学生学号
+
+        (Select sno From Student)
+        Minus
+        (Select distinct sno From SC)
+
+（3）Intersect操作
+
+- 返回两个查询结果的交集
+- 查询课程平均成绩在90分以上并且年龄小于20的学生学号
+
+        (Select sno From student where age<20)
+        Intersect
+        (Select sno
+            From (Select sno, AVG(score)
+                From SC
+                group by sno
+                having avg(score)>90) SC2
+        )
 
 ### 视图（View）
 
@@ -1333,3 +1343,168 @@ Intersect
 - 简化了用户眼中的数据，使用户可以集中于所关心的数据上
 - 同一数据库对不同用户提供不同的数据呈现方式
 - 安全保护
+
+#### 视图的定义
+
+例1：定义计算机系的学生视图
+
+    Create View cs_view (sno, name, age)
+    As Select Sno, sname, age
+    From student
+    Where Dept=‘计算机系’
+    Create View cs_view
+    As Select Sno, sname, age
+    From student
+    Where Dept=‘计算机系’
+
+若省略视图的列名表，则自动获得Select查询返回的列名
+
+例2：把每门课程的课程号和平均成绩定义为视图
+
+    Create View c_view
+    As Select cno, AVG(score) as avg_score
+    From sc
+    Group By Cno
+    Create View c_view (cno, avg_score)
+    As Select cno, AVG(score)
+    From sc
+    Group By cno
+
+- 在查询中使用了函数时
+  - 若省略列名表，则必须为函数指定别名
+  - 若使用了列名表，则可以不指定函数的别名
+
+#### 视图的查询
+
+> 与基本表的查询相同
+
+例：查询平均成绩在80分以上的课程名
+不使用视图
+
+    Select a. cname
+    From Course a,
+    (Select cno, avg(score) as avg_score From sc Group By cno) SC2
+    Where a.Cno=SC2.Cno and SC2.avg_score>80
+
+使用前面定义的视图 c_view
+
+    Select a.cname From course a, c_view b
+    Where a.Cno=b.Cno and b.avg_score>80
+
+#### 视图的更新
+
+与表的更新类似
+例：将计算机系学号为’001’的学生的姓名改为’Rose’
+
+    Update cs_view
+    Set name=‘Rose’
+    Where Sno=‘001’
+
+执行时先转换为student上的更新语句再执行
+
+- 不是所有视图都是可更新的
+基于连接查询的视图不可更新
+使用了函数、表达式、Distinct的视图不可更新
+使用了分组聚集操作的视图不可更新
+- 只有建立在单个表上，而且只是去掉了基本表的某些行和列，但保留了主键的视图才是可更新的
+
+视图的删除
+Drop View <视图名>
+
+> Select语句后能否包含不在Group By中出现的列? 不行
+
+#### 几个常用的特殊查询
+
+ Limit
+ All，Some，Any
+ Outer Join
+
+##### 1、Limit
+
+Limit：限制返回前多少行 （MySQL Only）
+
+- 返回平均成绩排前10的学生学号和平均成绩
+
+        Select sno, avg(score) as avg_score
+        From SC
+        Group By sno
+        Order By avg_score DESC
+        Limit 10
+
+- 返回平均成绩排第5-10名的学生学号和平均成绩
+
+        Select sno, avg(score) as avg_score
+        From SC
+        Group By sno
+        Order By avg_score DESC
+        Limit 4,6 --从第5行开始，返回6行 offset, rows
+
+##### 2、All，Some，Any
+
+- 查询工资比sales部门所有人都高的finance部门的员工
+
+        Select eno from employee where dept=‘finance’ and salary >
+        ALL (select salary from employee where dept=‘sales’)
+
+- All：要求子查询中的所有条件都满足
+- Some和Any：要求子查询中的某个条件满足即可
+
+        Select eno from employee where dept=‘finance’ and salary >
+        SOME (select salary from employee where dept=‘sales’)
+
+##### 3、Outer Join
+
+- 传统自然连接一般称为Inner Join，即连接时只返回匹配的结果。但实际中有时需要同时返回不匹配的结果
+  - “求供应商的供应商号以及该供应商供应的平均零件数”
+
+        Select sno, avg(QTY) as avg_items
+        From SPJ
+        Group By Sno
+
+  - 如果要求没供应零件的供应商也需返回该怎么处理？
+
+        Select S.Sno, avg(QTY) as avg_items
+        From S LEFT OUTER JOIN SPJ on S.Sno=SPJ.Sno
+        Group By S.Sno
+
+- Left Outer Join左外连接
+  - 左边关系的所有元组都出现在结果关系中
+  - 对于左边表的一条记录若与右边表有连接结果,则直接输出连接结果；若没有连接结果，则除了左边表自己的字段外其余字段都为NULL
+
+        elect S.sno, avg(QTY) as avg_items
+        From S LEFT OUTER JOIN SPJ on S.sno=SPJ.sno
+        Group By S.sno
+
+- Right Outer Join
+
+##### 在select语句中使用if和case
+
+- 输出每个同学的学号和选修课程数，要求如果没选课则输出选修课程数0
+- `Select sno, count(cno) as c_count from SC group by sno`
+- 问题：没选课的同学不会输出。解决方法：用left outer join
+
+        Select student.sno, count(cno) as c_count From student
+        LEFT OUTER JOIN SC on student.sno=sc.sno Group by SC.sno
+
+- 下一个问题：没选课的同学输出的c_count是NULL,如果想让没选课的输出数字0，解决方法：用if
+
+        Select student.sno,
+        If(count(cno) is null, 0, count(cno)) as c_count
+        From student LEFT OUTER JOIN SC on student.sno=sc.sno
+        Group by SC.sno
+
+- If(条件表达式，true时的值，false时的值)
+
+- 输出每个同学的学号和选修课程号与成绩，要求成绩按等级制输出，从E到A+
+
+        Select sno, cno
+        (Case
+            when score>=95 then ’A+’
+            when score>=90 and score<95 then ’A’
+            when score>=85 and score<90 then ’A-’
+            …
+            Else ’E’
+        ) as grade
+        From SC
+
+- 通过case语句可以定制多样化输出

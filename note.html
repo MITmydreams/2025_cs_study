@@ -486,8 +486,12 @@
 </ol>
 
           </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#使用聚集函数" class="md-toc-link">
-            <p>使用聚集函数</p>
+          <a href="#3排序查询结果" class="md-toc-link">
+            <p>3.排序查询结果</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#4使用聚集函数" class="md-toc-link">
+            <p>4.使用聚集函数</p>
 
           </a></div>
         </div>
@@ -503,10 +507,103 @@
           <a href="#嵌套查询" class="md-toc-link">
             <p>嵌套查询</p>
 
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#查询结果的连接" class="md-toc-link">
+            <p>查询结果的连接</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#视图view" class="md-toc-link"><p>视图（View）</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#视图的定义" class="md-toc-link">
+            <p>视图的定义</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#视图的查询" class="md-toc-link">
+            <p>视图的查询</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#视图的更新" class="md-toc-link">
+            <p>视图的更新</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#几个常用的特殊查询" class="md-toc-link"><p>几个常用的特殊查询</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#1-limit" class="md-toc-link">
+            <p>1、Limit</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#2-allsomeany" class="md-toc-link">
+            <p>2、All，Some，Any</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#3-outer-join" class="md-toc-link">
+            <p>3、Outer Join</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#在select语句中使用if和case" class="md-toc-link">
+            <p>在select语句中使用if和case</p>
+
           </a></div>
         </div>
       </details>
     
+        </div>
+      </details>
+    
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#过程化sql" class="md-toc-link"><p>过程化SQL</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#过程化sql与sql" class="md-toc-link">
+            <p>过程化SQL与SQL</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#过程化sql的程序结构" class="md-toc-link"><p>过程化SQL的程序结构</p>
+</a>
+          </summary>
+        <div>
+          <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#变量" class="md-toc-link"><p>变量</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#变量的赋值" class="md-toc-link">
+            <p>变量的赋值</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#循环语句" class="md-toc-link">
+            <p>循环语句</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#异常处理" class="md-toc-link">
+            <p>异常处理</p>
+
+          </a></div>
         </div>
       </details>
     
@@ -1741,7 +1838,8 @@ Order By &lt;排序列名表&gt; －－指定如何排序
 <pre class="language-text">Select * From Student
 Where sno IN (‘s001’,’s003’,’s006’,’s008’)
 </pre>
-<p><strong>IS [NOT] NULL</strong>：查询缺少年龄数据的学生</p>
+<p><code>*</code> 表示所有列。<br>
+<strong>IS [NOT] NULL</strong>：查询缺少年龄数据的学生</p>
 <pre class="language-text">Select * From Student Where age IS NULL
 </pre>
 <p><strong>LIKE</strong>：查询姓名的第一个字母为‘R’的学生</p>
@@ -1760,13 +1858,13 @@ Where age IS NULL and sname LIKE ‘R%’
 <p>查询学生的姓名:</p>
 <ul>
 <li><code>Select Distinct sname From Student</code></li>
-<li>Distinct只对记录有效，不针对某个特定列
+<li>Distinct<strong>只对记录有效</strong>，不针对某个特定列
 <ul>
 <li><code>Select Distinct sname, age From Student</code></li>
 </ul>
 </li>
 </ul>
-<p>排序查询结果:</p>
+<h6 id="3排序查询结果">3.排序查询结果 </h6>
 <p style="color:purple;">这是蓝色的文字。</p>
 <ul>
 <li>查询所有学生信息并将结果按年龄升序排列</li>
@@ -1778,7 +1876,7 @@ Where age IS NULL and sname LIKE ‘R%’
 </ul>
 </li>
 </ul>
-<h6 id="使用聚集函数">使用聚集函数 </h6>
+<h6 id="4使用聚集函数">4.使用聚集函数 </h6>
 <blockquote>
 <p>Count(列名)：对一列中的值计数<br>
 Count(*)：计算记录个数<br>
@@ -1905,21 +2003,22 @@ Order By student.sno
 <p>EXISTS（子查询）：当子查询返回结果非空时为真，否则为假</p>
 </li>
 <li>
-<p>执行分析：对于student的每一行，根据该行的sno去sc中查找有无匹配记录</p>
-</li>
-</ul>
+<p><strong>执行分析：对于student的每一行，根据该行的sno去sc中查找有无匹配记录</strong></p>
 <blockquote>
 <p>exists 通常用于嵌套查询中</p>
 </blockquote>
-<ul>
+</li>
 <li>
 <p>查询选修了全部课程的学号和姓名</p>
-<pre class="language-text">  Select sno, sname
+<pre class="language-text">  1
+  Select sno, sname
   From student
   Where NOT EXISTS
   (Select * From course Where NOT EXISTS
   (Select * From SC Where
   sno = student.sno and cno=course.cno))
+
+  2
   Select sno, sname
   From student
   Where NOT EXISTS
@@ -1953,6 +2052,424 @@ Group by sname
 having count(cno)&gt;=2
 </pre>
 </li>
+</ul>
+</li>
+</ul>
+<h4 id="查询结果的连接">查询结果的连接 </h4>
+<ul>
+<li>Union和Union All</li>
+<li>Minus</li>
+<li>Intersects</li>
+</ul>
+<p>（1）Union和Union All</p>
+<ul>
+<li>
+<p>查询课程平均成绩在90分以上或者年龄小于20的学生学号</p>
+<pre class="language-text">  (Select sno From student where age&lt;20)
+  UNION
+  (Select sno
+      From (Select sno, AVG(score)
+          From SC
+          group by sno
+          having avg(score)&gt;90) SC2
+  )
+</pre>
+</li>
+<li>
+<p>UNION操作自动去除重复记录 ——Set Union</p>
+</li>
+<li>
+<p>Union All操作不去除重复记录 ——Bag Union</p>
+</li>
+</ul>
+<p>（2）Minus操作：差</p>
+<ul>
+<li>
+<p>查询未选修课程的学生学号</p>
+<pre class="language-text">  (Select sno From Student)
+  Minus
+  (Select distinct sno From SC)
+</pre>
+</li>
+</ul>
+<p>（3）Intersect操作</p>
+<ul>
+<li>
+<p>返回两个查询结果的交集</p>
+</li>
+<li>
+<p>查询课程平均成绩在90分以上并且年龄小于20的学生学号</p>
+<pre class="language-text">  (Select sno From student where age&lt;20)
+  Intersect
+  (Select sno
+      From (Select sno, AVG(score)
+          From SC
+          group by sno
+          having avg(score)&gt;90) SC2
+  )
+</pre>
+</li>
+</ul>
+<h3 id="视图view">视图（View） </h3>
+<p>视图（View）给出了SQL数据库的外模式定义,从一个或几个基本表中导出的虚拟表，其数据没有实际存储，但可以和表一样操作。<br>
+<img src="./pic/chap3/strcu.png" alt="aa"></p>
+<ul>
+<li>视图具有和表一样的逻辑结构定义</li>
+<li>但视图没有相应的存储文件，而每个表都有相应的存储文件</li>
+</ul>
+<p>用途：</p>
+<ul>
+<li>逻辑数据独立性：用户程序与数据库结构</li>
+<li>简化了用户眼中的数据，使用户可以集中于所关心的数据上</li>
+<li>同一数据库对不同用户提供不同的数据呈现方式</li>
+<li>安全保护</li>
+</ul>
+<h4 id="视图的定义">视图的定义 </h4>
+<p>例1：定义计算机系的学生视图</p>
+<pre class="language-text">Create View cs_view (sno, name, age)
+As Select Sno, sname, age
+From student
+Where Dept=‘计算机系’
+Create View cs_view
+As Select Sno, sname, age
+From student
+Where Dept=‘计算机系’
+</pre>
+<p>若省略视图的列名表，则自动获得Select查询返回的列名</p>
+<p>例2：把每门课程的课程号和平均成绩定义为视图</p>
+<pre class="language-text">Create View c_view
+As Select cno, AVG(score) as avg_score
+From sc
+Group By Cno
+Create View c_view (cno, avg_score)
+As Select cno, AVG(score)
+From sc
+Group By cno
+</pre>
+<ul>
+<li>在查询中使用了函数时
+<ul>
+<li>若省略列名表，则必须为函数指定别名</li>
+<li>若使用了列名表，则可以不指定函数的别名</li>
+</ul>
+</li>
+</ul>
+<h4 id="视图的查询">视图的查询 </h4>
+<blockquote>
+<p>与基本表的查询相同</p>
+</blockquote>
+<p>例：查询平均成绩在80分以上的课程名<br>
+不使用视图</p>
+<pre class="language-text">Select a. cname
+From Course a,
+(Select cno, avg(score) as avg_score From sc Group By cno) SC2
+Where a.Cno=SC2.Cno and SC2.avg_score&gt;80
+</pre>
+<p>使用前面定义的视图 c_view</p>
+<pre class="language-text">Select a.cname From course a, c_view b
+Where a.Cno=b.Cno and b.avg_score&gt;80
+</pre>
+<h4 id="视图的更新">视图的更新 </h4>
+<p>与表的更新类似<br>
+例：将计算机系学号为’001’的学生的姓名改为’Rose’</p>
+<pre class="language-text">Update cs_view
+Set name=‘Rose’
+Where Sno=‘001’
+</pre>
+<p>执行时先转换为student上的更新语句再执行</p>
+<ul>
+<li>不是所有视图都是可更新的<br>
+基于连接查询的视图不可更新<br>
+使用了函数、表达式、Distinct的视图不可更新<br>
+使用了分组聚集操作的视图不可更新</li>
+<li>只有建立在单个表上，而且只是去掉了基本表的某些行和列，但保留了主键的视图才是可更新的</li>
+</ul>
+<p>视图的删除<br>
+Drop View &lt;视图名&gt;</p>
+<blockquote>
+<p>Select语句后能否包含不在Group By中出现的列? 不行</p>
+</blockquote>
+<h4 id="几个常用的特殊查询">几个常用的特殊查询 </h4>
+<p> Limit<br>
+ All，Some，Any<br>
+ Outer Join</p>
+<h5 id="1-limit">1、Limit </h5>
+<p>Limit：限制返回前多少行 （MySQL Only）</p>
+<ul>
+<li>
+<p>返回平均成绩排前10的学生学号和平均成绩</p>
+<pre class="language-text">  Select sno, avg(score) as avg_score
+  From SC
+  Group By sno
+  Order By avg_score DESC
+  Limit 10
+</pre>
+</li>
+<li>
+<p>返回平均成绩排第5-10名的学生学号和平均成绩</p>
+<pre class="language-text">  Select sno, avg(score) as avg_score
+  From SC
+  Group By sno
+  Order By avg_score DESC
+  Limit 4,6 --从第5行开始，返回6行 offset, rows
+</pre>
+</li>
+</ul>
+<h5 id="2-allsomeany">2、All，Some，Any </h5>
+<ul>
+<li>
+<p>查询工资比sales部门所有人都高的finance部门的员工</p>
+<pre class="language-text">  Select eno from employee where dept=‘finance’ and salary &gt;
+  ALL (select salary from employee where dept=‘sales’)
+</pre>
+</li>
+<li>
+<p>All：要求子查询中的所有条件都满足</p>
+</li>
+<li>
+<p>Some和Any：要求子查询中的某个条件满足即可</p>
+<pre class="language-text">  Select eno from employee where dept=‘finance’ and salary &gt;
+  SOME (select salary from employee where dept=‘sales’)
+</pre>
+</li>
+</ul>
+<h5 id="3-outer-join">3、Outer Join </h5>
+<ul>
+<li>
+<p>传统自然连接一般称为Inner Join，即连接时只返回匹配的结果。但实际中有时需要同时返回不匹配的结果</p>
+<ul>
+<li>
+<p>“求供应商的供应商号以及该供应商供应的平均零件数”</p>
+<pre class="language-text">Select sno, avg(QTY) as avg_items
+From SPJ
+Group By Sno
+</pre>
+</li>
+<li>
+<p>如果要求没供应零件的供应商也需返回该怎么处理？</p>
+<pre class="language-text">Select S.Sno, avg(QTY) as avg_items
+From S LEFT OUTER JOIN SPJ on S.Sno=SPJ.Sno
+Group By S.Sno
+</pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Left Outer Join左外连接</p>
+<ul>
+<li>
+<p>左边关系的所有元组都出现在结果关系中</p>
+</li>
+<li>
+<p>对于左边表的一条记录若与右边表有连接结果,则直接输出连接结果；若没有连接结果，则除了左边表自己的字段外其余字段都为NULL</p>
+<pre class="language-text">elect S.sno, avg(QTY) as avg_items
+From S LEFT OUTER JOIN SPJ on S.sno=SPJ.sno
+Group By S.sno
+</pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Right Outer Join</p>
+</li>
+</ul>
+<h5 id="在select语句中使用if和case">在select语句中使用if和case </h5>
+<ul>
+<li>
+<p>输出每个同学的学号和选修课程数，要求如果没选课则输出选修课程数0</p>
+</li>
+<li>
+<p><code>Select sno, count(cno) as c_count from SC group by sno</code></p>
+</li>
+<li>
+<p>问题：没选课的同学不会输出。解决方法：用left outer join</p>
+<pre class="language-text">  Select student.sno, count(cno) as c_count From student
+  LEFT OUTER JOIN SC on student.sno=sc.sno Group by SC.sno
+</pre>
+</li>
+<li>
+<p>下一个问题：没选课的同学输出的c_count是NULL,如果想让没选课的输出数字0，解决方法：用if</p>
+<pre class="language-text">  Select student.sno,
+  If(count(cno) is null, 0, count(cno)) as c_count
+  From student LEFT OUTER JOIN SC on student.sno=sc.sno
+  Group by SC.sno
+</pre>
+</li>
+<li>
+<p>If(条件表达式，true时的值，false时的值)</p>
+</li>
+<li>
+<p>输出每个同学的学号和选修课程号与成绩，要求成绩按等级制输出，从E到A+</p>
+<pre class="language-text">  Select sno, cno
+  (Case
+      when score&gt;=95 then ’A+’
+      when score&gt;=90 and score&lt;95 then ’A’
+      when score&gt;=85 and score&lt;90 then ’A-’
+      …
+      Else ’E’
+  ) as grade
+  From SC
+</pre>
+</li>
+<li>
+<p>通过case语句可以定制多样化输出</p>
+</li>
+</ul>
+<h2 id="过程化sql">过程化SQL </h2>
+<h3 id="过程化sql与sql">过程化SQL与SQL </h3>
+<p>SQL是描述性语言. 过程化SQL是对SQL的一个扩展，是一种过程化的程序设计语言。SQL本身并不能建立数据库应用程序。过程化SQL是包含SQL的一种过程性语言，它不仅支持SQL，还支持一些过程性语言特性。</p>
+<ul>
+<li>过程化SQL与SQL二者均可以在DBMS中运行，可以相互调用</li>
+</ul>
+<h3 id="过程化sql的程序结构">过程化SQL的程序结构 </h3>
+<ul>
+<li>第1种结构
+<ul>
+<li>在一次会话中使用过程化SQL语句编程
+<ul>
+<li>赋值，输出，表达式计算，函数等等</li>
+<li>不能使用流程控制语句（分支、循环）</li>
+<li>不支持定义语句块Begin……End</li>
+<li>不允许定义局部变量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第2种结构
+<ul>
+<li>在存储过程和触发器中编程
+<ul>
+<li>支持全部的过程化程序设计要素</li>
+<li>支持事务编程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>过程化SQL对SQL的主要扩展可以对比看C语言中实现的SQL不能做的事情，那就能看出来扩展在扩展什么了。</p>
+</blockquote>
+<ul>
+<li>*输入输出：
+<ul>
+<li>输出：select，输入：NA</li>
+</ul>
+</li>
+<li>程序块定义：Begin……End</li>
+<li>变量</li>
+<li>流程控制
+<ul>
+<li>顺序结构/分支结构/循环结构</li>
+</ul>
+</li>
+<li>出错处理</li>
+<li>游标
+<ul>
+<li>缓存一些动态数据</li>
+</ul>
+</li>
+<li>过程：存储过程/函数、触发器</li>
+</ul>
+<h4 id="变量">变量 </h4>
+<ul>
+<li>MySQL支持三种类型的变量
+<ul>
+<li>局部变量
+<ul>
+<li>必须使用DECLARE定义：&lt;变量名&gt; &lt;类型&gt;</li>
+<li>变量名使用常规定义，字母、数字、下划线</li>
+<li>作用域为Begin……End之间的程序块</li>
+</ul>
+</li>
+<li>用户变量
+<ul>
+<li>不需要预先定义，变量名前须加一个“@”符号</li>
+<li>作用域为当前会话（连接），所有存储过程和函数可共享用户变量</li>
+</ul>
+</li>
+<li>系统变量
+<ul>
+<li>MySQL内部定义的变量，变量名前有 “@@”符号</li>
+<li>作用域为所有客户端连接，只能读取</li>
+<li>一般用于在程序中判断系统当前的某个特定状态值
+<ul>
+<li>例如：@@version</li>
+</ul>
+</li>
+<li>查看所有的系统变量：show global variables</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="变量的赋值">变量的赋值 </h5>
+<p>Set赋值 （MySQL和MS SQL Server，Oracle用“:=”）<br>
+Declare status int;<br>
+Set status=1; -- 局部变量须预先定义<br>
+Set @done=1；-- 用户变量不需要定义<br>
+Select …… Into &lt;变量&gt; （都支持）<br>
+Select max(score) From SC into v1; -- 局部变量<br>
+Select sname from student where sno=‘s1’ Into @name; -- 用户变量<br>
+Select v1 into @name;<br>
+SELECT max(score) , min(score) into n2, n3 FROM SC;<br>
+ⅹSELECT max(score) into n2 , min(score) into n3 FROM SC;</p>
+<pre class="language-text">IF x＝5 THEN
+    SET x=5;
+END IF;
+</pre>
+<p>注意分号（END IF）</p>
+<pre class="language-text">CASE case_value
+    WHEN when_value THEN statement_list
+    WHEN when_value THEN statement_list
+    ...
+    ELSE statement_list
+END CASE；
+//
+CASE
+    WHEN search_condition THEN statement_list
+    WHEN search_condition THEN statement_list
+    ...
+    ELSE statement_list
+END CASE；
+</pre>
+<h4 id="循环语句">循环语句 </h4>
+<pre class="language-text">While &lt;循环控制条件&gt; Do
+    &lt;语句&gt;
+    ……
+End While;
+</pre>
+<h3 id="异常处理">异常处理 </h3>
+<ul>
+<li>存储过程内部执行时出错怎么办？
+<ul>
+<li>需要使用错误陷阱，捕捉程序运行中出现的错误或意外情况，并加以处理</li>
+</ul>
+</li>
+<li>基本方法
+<ul>
+<li>Declare &lt;处理方式&gt; Handler For &lt;异常类型&gt; <sql>
+<ul>
+<li>&lt;处理方式&gt;
+<ul>
+<li>Continue：继续执行下一条语句</li>
+<li>Exit：直接退出（很少用）</li>
+<li>Undo：回退（目前不支持）</li>
+</ul>
+</li>
+<li>&lt;异常类型&gt;
+<ul>
+<li>SQLSTATE值</li>
+<li>MySQL error code</li>
+<li>SQLWARNING，NOT FOUND或SQLEXCEPTION，是SQLSTATE值简写</li>
+<li>与MySQL错误代码或SQLSTATE值相关联的命名条件。</li>
+</ul>
+</li>
+<li>
+<sql>
+- 当处理方式为Continue时执行的sql语句
+</sql></li>
+</ul>
+</sql></li>
 </ul>
 </li>
 </ul>
